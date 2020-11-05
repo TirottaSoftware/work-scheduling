@@ -12,6 +12,21 @@ namespace Work_Scheduling
         private string name;
         private int salary;
         private int workdaysCount;
+        private int desiredDays;
+
+        public int DesiredDays
+        {
+            get { return desiredDays; }
+            set 
+            {
+                if (value < 0 || value > 7)
+                {
+                    throw new ArgumentException("Desired workdays must be in a range ( 0-7 )");
+                }  
+                desiredDays = value; 
+            }
+        }
+
 
         public int WorkdaysCount
         {

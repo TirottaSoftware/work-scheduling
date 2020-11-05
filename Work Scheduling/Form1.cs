@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Work_Scheduling
 {
     public partial class Form1 : Form
     {
+        private DesireList desireList;
         private List<Employee> availableEmployees;
         private WorkSchedule workSchedule;
         public Form1()
         {
             InitializeComponent();
+            desireList = new DesireList();
             availableEmployees = new List<Employee>();
             workSchedule = new WorkSchedule();
             UpdateScheduleList();
@@ -47,9 +47,11 @@ namespace Work_Scheduling
         private void UpdateEmployeesList()
         {
             lbxEmployees.Items.Clear();
+
             foreach (var availableEmployee in availableEmployees)
             {
                 lbxEmployees.Items.Add($"{availableEmployee.Name} - {availableEmployee.Salary}");
+                desireList.AddEmployee(availableEmployee);
             }
         }
 
@@ -74,6 +76,13 @@ namespace Work_Scheduling
 
 
                 Employee employee = new Employee(employeeName, employeeSalary);
+                foreach (var emp in availableEmployees)
+                {
+                    if (emp.Name == employee.Name)
+                    {
+                        throw new ArgumentException($"{employeeName} is already in the list");
+                    }
+                }
                 availableEmployees.Add(employee);
                 UpdateEmployeesList();
                 tbxEmployeeName.Clear();
@@ -88,6 +97,12 @@ namespace Work_Scheduling
             catch(FormatException)
             {
                 MessageBox.Show("Invalid Salary Value");
+                tbxEmployeeName.Clear();
+                tbxEmployeeSalary.Clear();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 tbxEmployeeName.Clear();
                 tbxEmployeeSalary.Clear();
             }
@@ -129,9 +144,13 @@ namespace Work_Scheduling
                 UpdateWeeklySalary(selectedEmployee);
                 UpdateScheduleList();
             }
-            catch(Exception ex)
+            catch(ArgumentOutOfRangeException)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Please select an employee first");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Please select a day to which you want to assign this employee");
             }
         }
 
@@ -208,6 +227,11 @@ namespace Work_Scheduling
                     lbxEmployees.Items.Add($"{emp.Name} - {emp.Salary}");
                 }
             }
+        }
+
+        private void btnDesireList_Click(object sender, EventArgs e)
+        {
+            desireList.ShowDialog();
         }
     }
 }

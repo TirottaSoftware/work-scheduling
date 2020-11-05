@@ -45,6 +45,7 @@
             this.rbtnAssigned = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.lblWeeklySalary = new System.Windows.Forms.Label();
+            this.btnDesireList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddEmployee
@@ -197,7 +198,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(137, 91);
+            this.label5.Location = new System.Drawing.Point(133, 91);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 15;
@@ -207,17 +208,28 @@
             // 
             this.lblWeeklySalary.AutoSize = true;
             this.lblWeeklySalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWeeklySalary.Location = new System.Drawing.Point(144, 107);
+            this.lblWeeklySalary.Location = new System.Drawing.Point(134, 107);
             this.lblWeeklySalary.Name = "lblWeeklySalary";
             this.lblWeeklySalary.Size = new System.Drawing.Size(44, 31);
             this.lblWeeklySalary.TabIndex = 16;
             this.lblWeeklySalary.Text = "€0";
+            // 
+            // btnDesireList
+            // 
+            this.btnDesireList.Location = new System.Drawing.Point(236, 208);
+            this.btnDesireList.Name = "btnDesireList";
+            this.btnDesireList.Size = new System.Drawing.Size(88, 26);
+            this.btnDesireList.TabIndex = 17;
+            this.btnDesireList.Text = "Desire List";
+            this.btnDesireList.UseVisualStyleBackColor = true;
+            this.btnDesireList.Click += new System.EventHandler(this.btnDesireList_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 311);
+            this.Controls.Add(this.btnDesireList);
             this.Controls.Add(this.lblWeeklySalary);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.rbtnAssigned);
@@ -262,6 +274,7 @@
         private System.Windows.Forms.RadioButton rbtnAssigned;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblWeeklySalary;
+        private System.Windows.Forms.Button btnDesireList;
     }
 }
 
