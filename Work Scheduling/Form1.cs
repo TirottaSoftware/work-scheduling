@@ -62,19 +62,6 @@ namespace Work_Scheduling
             {
                 int employeeSalary = int.Parse(tbxEmployeeSalary.Text);
 
-                //if (int.TryParse(tbxEmployeeSalary.Text, out employeeSalary))
-                //{
-                //    employeeSalary = int.Parse(tbxEmployeeSalary.Text);
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Invalid Salary Value");
-                //    tbxEmployeeName.Clear();
-                //    tbxEmployeeSalary.Clear();
-                //    return;
-                //}
-
-
                 Employee employee = new Employee(employeeName, employeeSalary);
                 foreach (var emp in availableEmployees)
                 {
@@ -94,13 +81,13 @@ namespace Work_Scheduling
                 tbxEmployeeName.Clear();
                 tbxEmployeeSalary.Clear();
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 MessageBox.Show("Invalid Salary Value");
                 tbxEmployeeName.Clear();
                 tbxEmployeeSalary.Clear();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 tbxEmployeeName.Clear();
@@ -109,14 +96,10 @@ namespace Work_Scheduling
         }
         private void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
-            string selectedEmployee = lbxEmployees.SelectedItem.ToString();
 
-            if (selectedEmployee == null)
+            try
             {
-                //Error
-            }
-            else
-            {
+                string selectedEmployee = lbxEmployees.SelectedItem.ToString();
                 //George - 35
                 string[] employeeData = selectedEmployee.Split('-'); //{"George" , "35"}
                 string employeeName = employeeData[0].TrimEnd(); //George
@@ -127,6 +110,10 @@ namespace Work_Scheduling
                 RemoveEmployee(employeeToRemove);
                 lblWeeklySalary.Text = "€0";
                 UpdateScheduleList();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Select an employee first.");
             }
         }
 
@@ -144,7 +131,7 @@ namespace Work_Scheduling
                 UpdateWeeklySalary(selectedEmployee);
                 UpdateScheduleList();
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select an employee first");
             }
